@@ -2,12 +2,14 @@ const express = require('express');
 const jwt     = require('jsonwebtoken');
 const User    = require('../models/User');
 const protect = require('../middleware/auth');
+const { sendWelcomeEmail } = require('../utils/emailService');
 
 const router = express.Router();
 
 const signToken = (id) =>
   jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: '7d' });
 
+// POST /api/auth/register
 router.post('/register', async (req, res) => {
   try {
     const { name, email, password } = req.body;
@@ -21,6 +23,11 @@ router.post('/register', async (req, res) => {
     const user  = await User.create({ name, email, password });
     const token = signToken(user._id);
 
+    // Send welcome email (don't await so it doesn't slow down registration)
+    sendWelcomeEmail({ to: user.email, name: user.name }).catch((err) =>
+      console.error('Welcome email error:', err.message)
+    );
+
     res.status(201).json({
       token,
       user: { id: user._id, name: user.name, email: user.email, currency: user.currency },
@@ -30,6 +37,7 @@ router.post('/register', async (req, res) => {
   }
 });
 
+// POST /api/auth/login
 router.post('/login', async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -47,10 +55,12 @@ router.post('/login', async (req, res) => {
   }
 });
 
+// GET /api/auth/me
 router.get('/me', protect, (req, res) => {
   const { _id: id, name, email, currency } = req.user;
   res.json({ id, name, email, currency });
 });
+
 // PUT /api/auth/profile
 router.put('/profile', protect, async (req, res) => {
   try {
