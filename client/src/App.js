@@ -1,4 +1,6 @@
 import React from 'react';
+import Reports from './pages/Reports';
+import Profile from './pages/Profile';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider, useAuth } from './context/AuthContext';
 
@@ -27,15 +29,18 @@ export default function App() {
   return (
     <AuthProvider>
       <BrowserRouter>
-        <Routes>
-          <Route path="/login"    element={<PublicRoute><Login /></PublicRoute>} />
-          <Route path="/register" element={<PublicRoute><Register /></PublicRoute>} />
-          <Route path="/" element={<PrivateRoute><Layout /></PrivateRoute>}>
-            <Route index                element={<Dashboard />} />
-            <Route path="transactions"  element={<Transactions />} />
-            <Route path="budgets"       element={<Budgets />} />
-          </Route>
-        </Routes>
+       <Routes>
+  <Route path="/login"    element={<PublicRoute><Login /></PublicRoute>} />
+  <Route path="/register" element={<PublicRoute><Register /></PublicRoute>} />
+
+  <Route path="/" element={<PrivateRoute><Layout /></PrivateRoute>}>
+    <Route index                element={<Dashboard />} />
+    <Route path="transactions"  element={<Transactions />} />
+    <Route path="budgets"       element={<Budgets />} />
+    <Route path="reports"       element={<Reports />} />
+    <Route path="profile" element={<Profile />} />
+  </Route>
+</Routes>
       </BrowserRouter>
     </AuthProvider>
   );

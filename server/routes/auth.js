@@ -51,5 +51,34 @@ router.get('/me', protect, (req, res) => {
   const { _id: id, name, email, currency } = req.user;
   res.json({ id, name, email, currency });
 });
+// PUT /api/auth/profile
+router.put('/profile', protect, async (req, res) => {
+  try {
+    const { name, currency } = req.body;
+    const user = await User.findByIdAndUpdate(
+      req.user._id,
+      { name, currency },
+      { new: true, runValidators: true }
+    );
+    res.json({ id: user._id, name: user.name, email: user.email, currency: user.currency });
+  } catch (err) {
+    res.status(400).json({ message: err.message });
+  }
+});
+
+// PUT /api/auth/password
+router.put('/password', protect, async (req, res) => {
+  try {
+    const { currentPassword, newPassword } = req.body;
+    const user = await User.findById(req.user._id).select('+password');
+    if (!(await user.comparePassword(currentPassword)))
+      return res.status(401).json({ message: 'Current password is incorrect' });
+    user.password = newPassword;
+    await user.save();
+    res.json({ message: 'Password updated successfully' });
+  } catch (err) {
+    res.status(400).json({ message: err.message });
+  }
+});
 
 module.exports = router;
