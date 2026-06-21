@@ -43,7 +43,12 @@ export default function Login() {
             {loading ? 'Signing in...' : 'Sign In'}
           </button>
         </form>
-        <p className="mt-4 text-muted" style={{ fontSize: '14px', textAlign: 'center' }}>
+
+        <p style={{ fontSize: '14px', textAlign: 'center', marginTop: '12px' }}>
+          <Link to="/forgot-password" style={{ color: 'var(--green)' }}>Forgot your password?</Link>
+        </p>
+
+        <p style={{ fontSize: '14px', textAlign: 'center', marginTop: '8px', color: 'var(--text-muted)' }}>
           Don't have an account? <Link to="/register" style={{ color: 'var(--green)' }}>Register</Link>
         </p>
       </div>

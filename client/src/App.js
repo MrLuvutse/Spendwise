@@ -4,15 +4,17 @@ import Profile from './pages/Profile';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider, useAuth } from './context/AuthContext';
 
-import Login        from './pages/Login';
-import Register     from './pages/Register';
-import Dashboard    from './pages/Dashboard';
-import Transactions from './pages/Transactions';
-import Budgets      from './pages/Budgets';
-import Layout       from './components/Layout';
-import Recurring from './pages/Recurring';
-import Accounts from './pages/Accounts';
-import Goals from './pages/Goals';
+import Login          from './pages/Login';
+import Register       from './pages/Register';
+import Dashboard      from './pages/Dashboard';
+import Transactions   from './pages/Transactions';
+import Budgets        from './pages/Budgets';
+import Layout         from './components/Layout';
+import Recurring      from './pages/Recurring';
+import Accounts       from './pages/Accounts';
+import Goals          from './pages/Goals';
+import ForgotPassword from './pages/ForgotPassword';
+import ResetPassword  from './pages/ResetPassword';
 
 import './index.css';
 
@@ -32,21 +34,25 @@ export default function App() {
   return (
     <AuthProvider>
       <BrowserRouter>
-       <Routes>
-  <Route path="/login"    element={<PublicRoute><Login /></PublicRoute>} />
-  <Route path="/register" element={<PublicRoute><Register /></PublicRoute>} />
+        <Routes>
+          {/* Public routes */}
+          <Route path="/login"            element={<PublicRoute><Login /></PublicRoute>} />
+          <Route path="/register"         element={<PublicRoute><Register /></PublicRoute>} />
+          <Route path="/forgot-password"  element={<ForgotPassword />} />
+          <Route path="/reset-password"   element={<ResetPassword />} />
 
-  <Route path="/" element={<PrivateRoute><Layout /></PrivateRoute>}>
-    <Route index                element={<Dashboard />} />
-    <Route path="transactions"  element={<Transactions />} />
-    <Route path="budgets"       element={<Budgets />} />
-    <Route path="reports"       element={<Reports />} />
-    <Route path="profile" element={<Profile />} />
-    <Route path="recurring" element={<Recurring />} />
-    <Route path="accounts" element={<Accounts />} />
-    <Route path="goals" element={<Goals />} />
-  </Route>
-</Routes>
+          {/* Private routes */}
+          <Route path="/" element={<PrivateRoute><Layout /></PrivateRoute>}>
+            <Route index                  element={<Dashboard />} />
+            <Route path="transactions"    element={<Transactions />} />
+            <Route path="budgets"         element={<Budgets />} />
+            <Route path="reports"         element={<Reports />} />
+            <Route path="profile"         element={<Profile />} />
+            <Route path="recurring"       element={<Recurring />} />
+            <Route path="accounts"        element={<Accounts />} />
+            <Route path="goals"           element={<Goals />} />
+          </Route>
+        </Routes>
       </BrowserRouter>
     </AuthProvider>
   );
