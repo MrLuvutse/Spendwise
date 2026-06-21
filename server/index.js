@@ -7,6 +7,7 @@ const authRoutes        = require('./routes/auth');
 const transactionRoutes = require('./routes/transactions');
 const budgetRoutes      = require('./routes/budgets');
 const recurringRoutes = require('./routes/recurring');
+const accountRoutes = require('./routes/accounts');
 const { startBudgetChecker } = require('./utils/budgetChecker');
 
 const app = express();
@@ -17,6 +18,7 @@ app.use(express.json());
 app.use('/api/auth',         authRoutes);
 app.use('/api/transactions', transactionRoutes);
 app.use('/api/budgets',      budgetRoutes);
+app.use('/api/accounts', accountRoutes);
 app.use('/api/recurring', recurringRoutes);
 
 app.get('/api/health', (req, res) => res.json({ status: 'SpendWise API running ✅' }));

@@ -11,6 +11,7 @@ import Transactions from './pages/Transactions';
 import Budgets      from './pages/Budgets';
 import Layout       from './components/Layout';
 import Recurring from './pages/Recurring';
+import Accounts from './pages/Accounts';
 
 import './index.css';
 
@@ -41,6 +42,7 @@ export default function App() {
     <Route path="reports"       element={<Reports />} />
     <Route path="profile" element={<Profile />} />
     <Route path="recurring" element={<Recurring />} />
+    <Route path="accounts" element={<Accounts />} />
   </Route>
 </Routes>
       </BrowserRouter>

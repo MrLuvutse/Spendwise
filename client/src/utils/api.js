@@ -42,5 +42,10 @@ export const createRecurring   = (data)       => api.post('/recurring', data);
 export const updateRecurring   = (id, data)   => api.put(`/recurring/${id}`, data);
 export const deleteRecurring   = (id)         => api.delete(`/recurring/${id}`);
 export const processRecurring  = ()           => api.post('/recurring/process');
+// ---- Accounts ----
+export const getAccounts    = ()         => api.get('/accounts');
+export const createAccount  = (data)     => api.post('/accounts', data);
+export const updateAccount  = (id, data) => api.put(`/accounts/${id}`, data);
+export const deleteAccount  = (id)       => api.delete(`/accounts/${id}`);
 
 export default api;

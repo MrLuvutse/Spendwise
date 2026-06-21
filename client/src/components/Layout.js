@@ -14,6 +14,16 @@ export default function Layout() {
 
   const handleLogout = () => { logout(); navigate('/login'); };
 
+  const navLinks = [
+    { to: '/',            icon: '📊', label: 'Dashboard',    end: true },
+    { to: '/transactions',icon: '💸', label: 'Transactions'  },
+    { to: '/budgets',     icon: '🎯', label: 'Budgets'       },
+    { to: '/accounts',    icon: '🏦', label: 'Accounts'      },
+    { to: '/reports',     icon: '📈', label: 'Reports'       },
+    { to: '/recurring',   icon: '🔄', label: 'Recurring'     },
+    { to: '/profile',     icon: '👤', label: 'Profile'       },
+  ];
+
   return (
     <div className="layout">
       {/* Mobile top bar */}
@@ -33,24 +43,16 @@ export default function Layout() {
       <aside className="sidebar">
         <div className="sidebar__logo">💰 SpendWise</div>
         <nav className="sidebar__nav">
-          <NavLink to="/" end className={({ isActive }) => `sidebar__link ${isActive ? 'active' : ''}`}>
-            <span className="icon">📊</span> Dashboard
-          </NavLink>
-          <NavLink to="/transactions" className={({ isActive }) => `sidebar__link ${isActive ? 'active' : ''}`}>
-            <span className="icon">💸</span> Transactions
-          </NavLink>
-          <NavLink to="/budgets" className={({ isActive }) => `sidebar__link ${isActive ? 'active' : ''}`}>
-            <span className="icon">🎯</span> Budgets
-          </NavLink>
-          <NavLink to="/reports" className={({ isActive }) => `sidebar__link ${isActive ? 'active' : ''}`}>
-            <span className="icon">📈</span> Reports
-          </NavLink>
-          <NavLink to="/profile" className={({ isActive }) => `sidebar__link ${isActive ? 'active' : ''}`}>
-            <span className="icon">👤</span> Profile
-          </NavLink>
-          <NavLink to="/recurring" className={({ isActive }) => `sidebar__link ${isActive ? 'active' : ''}`}>
-  <span className="icon">🔄</span> Recurring
-</NavLink>
+          {navLinks.map((link) => (
+            <NavLink
+              key={link.to}
+              to={link.to}
+              end={link.end}
+              className={({ isActive }) => `sidebar__link ${isActive ? 'active' : ''}`}
+            >
+              <span className="icon">{link.icon}</span> {link.label}
+            </NavLink>
+          ))}
         </nav>
 
         <div className="sidebar__logout">
@@ -69,6 +71,21 @@ export default function Layout() {
           </button>
         </div>
       </aside>
+
+      {/* Mobile bottom nav — show first 5 most important */}
+      <nav className="mobile-bottom-nav">
+        {navLinks.slice(0, 5).map((link) => (
+          <NavLink
+            key={link.to}
+            to={link.to}
+            end={link.end}
+            className={({ isActive }) => `mobile-bottom-nav__link ${isActive ? 'active' : ''}`}
+          >
+            <span>{link.icon}</span>
+            <span>{link.label}</span>
+          </NavLink>
+        ))}
+      </nav>
 
       <main className="main">
         <Outlet />
