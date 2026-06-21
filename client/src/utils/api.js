@@ -47,5 +47,11 @@ export const getAccounts    = ()         => api.get('/accounts');
 export const createAccount  = (data)     => api.post('/accounts', data);
 export const updateAccount  = (id, data) => api.put(`/accounts/${id}`, data);
 export const deleteAccount  = (id)       => api.delete(`/accounts/${id}`);
+// ---- Goals ----
+export const getGoals     = ()         => api.get('/goals');
+export const createGoal   = (data)     => api.post('/goals', data);
+export const updateGoal   = (id, data) => api.put(`/goals/${id}`, data);
+export const deleteGoal   = (id)       => api.delete(`/goals/${id}`);
+export const depositGoal  = (id, data) => api.post(`/goals/${id}/deposit`, data);
 
 export default api;

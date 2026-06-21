@@ -22,6 +22,7 @@ export default function Layout() {
     { to: '/reports',     icon: '📈', label: 'Reports'       },
     { to: '/recurring',   icon: '🔄', label: 'Recurring'     },
     { to: '/profile',     icon: '👤', label: 'Profile'       },
+    { to: '/goals', icon: '📊', label: 'Goals' },
   ];
 
   return (
