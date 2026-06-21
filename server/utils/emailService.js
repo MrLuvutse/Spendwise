@@ -134,7 +134,7 @@ const sendWelcomeEmail = async ({ to, name }) => {
   });
 };
 const sendPasswordResetEmail = async ({ to, name, token }) => {
-  const resetUrl = `http://localhost:3000/reset-password?token=${token}`;
+  const resetUrl = `https://spendwise-client.vercel.app/reset-password?token=${token}`;
 
   const html = `
     <div style="font-family: Arial, sans-serif; max-width: 500px; margin: 0 auto;">
