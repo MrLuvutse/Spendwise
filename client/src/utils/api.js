@@ -19,16 +19,28 @@ api.interceptors.response.use(
   }
 );
 
-export const register           = (data)       => api.post('/auth/register', data);
-export const login              = (data)       => api.post('/auth/login', data);
-export const getMe              = ()           => api.get('/auth/me');
-export const getTransactions    = (params)     => api.get('/transactions', { params });
-export const getSummary         = (params)     => api.get('/transactions/summary', { params });
-export const createTransaction  = (data)       => api.post('/transactions', data);
-export const updateTransaction  = (id, data)   => api.put(`/transactions/${id}`, data);
-export const deleteTransaction  = (id)         => api.delete(`/transactions/${id}`);
-export const getBudgets         = (params)     => api.get('/budgets', { params });
-export const saveBudget         = (data)       => api.post('/budgets', data);
-export const deleteBudget       = (id)         => api.delete(`/budgets/${id}`);
+// ---- Auth ----
+export const register          = (data)       => api.post('/auth/register', data);
+export const login             = (data)       => api.post('/auth/login', data);
+export const getMe             = ()           => api.get('/auth/me');
+
+// ---- Transactions ----
+export const getTransactions   = (params)     => api.get('/transactions', { params });
+export const getSummary        = (params)     => api.get('/transactions/summary', { params });
+export const createTransaction = (data)       => api.post('/transactions', data);
+export const updateTransaction = (id, data)   => api.put(`/transactions/${id}`, data);
+export const deleteTransaction = (id)         => api.delete(`/transactions/${id}`);
+
+// ---- Budgets ----
+export const getBudgets        = (params)     => api.get('/budgets', { params });
+export const saveBudget        = (data)       => api.post('/budgets', data);
+export const deleteBudget      = (id)         => api.delete(`/budgets/${id}`);
+
+// ---- Recurring Transactions ----
+export const getRecurring      = ()           => api.get('/recurring');
+export const createRecurring   = (data)       => api.post('/recurring', data);
+export const updateRecurring   = (id, data)   => api.put(`/recurring/${id}`, data);
+export const deleteRecurring   = (id)         => api.delete(`/recurring/${id}`);
+export const processRecurring  = ()           => api.post('/recurring/process');
 
 export default api;

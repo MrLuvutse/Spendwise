@@ -10,6 +10,7 @@ import Dashboard    from './pages/Dashboard';
 import Transactions from './pages/Transactions';
 import Budgets      from './pages/Budgets';
 import Layout       from './components/Layout';
+import Recurring from './pages/Recurring';
 
 import './index.css';
 
@@ -39,6 +40,7 @@ export default function App() {
     <Route path="budgets"       element={<Budgets />} />
     <Route path="reports"       element={<Reports />} />
     <Route path="profile" element={<Profile />} />
+    <Route path="recurring" element={<Recurring />} />
   </Route>
 </Routes>
       </BrowserRouter>

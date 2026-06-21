@@ -48,6 +48,9 @@ export default function Layout() {
           <NavLink to="/profile" className={({ isActive }) => `sidebar__link ${isActive ? 'active' : ''}`}>
             <span className="icon">👤</span> Profile
           </NavLink>
+          <NavLink to="/recurring" className={({ isActive }) => `sidebar__link ${isActive ? 'active' : ''}`}>
+  <span className="icon">🔄</span> Recurring
+</NavLink>
         </nav>
 
         <div className="sidebar__logout">
