@@ -14,10 +14,10 @@ export default function Dashboard() {
   const year  = now.getFullYear();
 
   useEffect(() => {
-    Promise.all([getSummary({ month, year }), getTransactions({ limit: 5 })])
-      .then(([s, t]) => { setSummary(s.data); setRecent(t.data.transactions); })
-      .finally(() => setLoading(false));
-  }, []);
+  Promise.all([getSummary({ month, year }), getTransactions({ limit: 5 })])
+    .then(([s, t]) => { setSummary(s.data); setRecent(t.data.transactions); })
+    .finally(() => setLoading(false));
+}, [month, year]); // eslint-disable-line react-hooks/exhaustive-deps
 
   if (loading) return <div className="loading-screen">Loading dashboard...</div>;
 
