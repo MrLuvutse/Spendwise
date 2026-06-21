@@ -13,8 +13,14 @@ const { startBudgetChecker } = require('./utils/budgetChecker');
 
 const app = express();
 
-app.use(cors({ origin: process.env.CLIENT_URL || 'http://localhost:3000' }));
-app.use(express.json());
+app.use(cors({
+  origin: [
+    'http://localhost:3000',
+    'https://spendwise-one-steel.vercel.app',
+    process.env.CLIENT_URL,
+  ].filter(Boolean),
+  credentials: true,
+}));
 
 app.use('/api/auth',         authRoutes);
 app.use('/api/transactions', transactionRoutes);
