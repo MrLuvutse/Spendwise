@@ -12,14 +12,14 @@ export default function Dashboard() {
   const now = new Date();
   const month = now.getMonth() + 1;
   const year  = now.getFullYear();
-
   useEffect(() => {
   Promise.all([getSummary({ month, year }), getTransactions({ limit: 5 })])
     .then(([s, t]) => { setSummary(s.data); setRecent(t.data.transactions); })
     .finally(() => setLoading(false));
-}, [month, year]); // eslint-disable-line react-hooks/exhaustive-deps
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+}, []);
 
-  if (loading) return <div className="loading-screen">Loading dashboard...</div>;
+ if (loading) return <div className="loading-screen">Loading dashboard...</div>;
 
   const pieData = Object.entries(summary?.byCategory || {}).map(([name, val]) => ({ name, value: val.total }));
   const barData = [
